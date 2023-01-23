@@ -1,6 +1,6 @@
 import Todo from '../interfaces/Todo.ts';
 
-export const todos : Array<Todo> = [
+export const Todos : Array<Todo> = [
     {
         id: '-1U7dpEv8qqReVO5qNMYhsFNq3a2KT',
         todo: 'read book',

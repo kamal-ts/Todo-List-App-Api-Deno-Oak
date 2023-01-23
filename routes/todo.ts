@@ -4,10 +4,10 @@ import todoController from '../controller/todoController.ts';
 const router = new Router();
 
 router
-    .get("/todos", todoController.getAllBooks)
-    .get("/todos:id", todoController.getBookById)
-    .post("/todos", todoController.createBook)
-    .patch("/todos", todoController.updateBook)
-    .delete("/todos/:id", todoController.deleteBook);
+    .get("/todos", todoController.getAllTodos)
+    .get("/todos/:id", todoController.getTodoById)
+    .post("/todos", todoController.createTodo)
+    .patch("/todos", todoController.updateTodo)
+    .delete("/todos/:id", todoController.deleteTodo);
 
 export default router;

@@ -1,4 +1,4 @@
-import { Response, Request } from "https://deno.land/x/oak@v11.1.0/mod.ts";
+import { Response, Request } from "../deps.ts";
 import { Todos } from '../data/todos.ts'
 import Todo from "../interfaces/Todo.ts";
 

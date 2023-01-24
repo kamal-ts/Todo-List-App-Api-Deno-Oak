@@ -1,4 +1,4 @@
-import { Application, Context } from "https://deno.land/x/oak@v11.1.0/mod.ts";
+import { Application, Context } from "./deps.ts";
 import todoRouter from './routes/todo.ts'
 
 const app = new Application();

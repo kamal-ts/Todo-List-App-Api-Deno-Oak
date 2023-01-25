@@ -40,6 +40,7 @@ export default {
         }
         return;
     },
+
     async createTodo({ request, response }: myCtx): Promise<void> {
         const { todo, isCompleted } = await request.body().value;
         
@@ -67,8 +68,43 @@ export default {
         };
         return;
     },
-    updateTodo({ response }: myCtx) {
-        response.status
+
+    async updateTodo({ params, request, response }: myCtx) {
+        const id: string = params.id;
+        // find todo by param id
+        const findIndex = Todos.findIndex((t: Todo): boolean => t.id === id);
+        // if todo not found
+        if (findIndex < 0) {
+            response.status = 404;
+            response.body = {
+                success: false,
+                message: "id not found",
+            };
+            return;
+        }
+        // get request body
+        const dataBody : {todo?: string, isCompleted?:boolean} = await request.body().value;
+        if (!request.hasBody) {
+            response.status = 400;
+            response.body = {
+                success: false,
+                message: "No data provided",
+            };
+            return;
+        }
+        // update todo by index
+        Todos[findIndex] = {
+            ...Todos[findIndex],
+            ...dataBody,
+            updatedAt: String(new Date())
+        };
+        // response
+        response.status = 201;
+        response.body = {
+            success: "true",
+            data: Todos[findIndex]
+        };
+        return;
     },
     deleteTodo({ response }: myCtx) {
         response.status

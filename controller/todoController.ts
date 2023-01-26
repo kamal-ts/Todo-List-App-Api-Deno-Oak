@@ -52,7 +52,7 @@ export default {
             };
             return;
         }
-        
+
         const data: Todo = {
             id: String(crypto.randomUUID()),
             todo: String(todo),
@@ -69,10 +69,10 @@ export default {
         return;
     },
 
-    async updateTodo({ params, request, response }: myCtx) {
+    async updateTodo({ params, request, response }: myCtx): Promise<void> {
         const id: string = params.id;
         // find todo by param id
-        const findIndex = Todos.findIndex((t: Todo): boolean => t.id === id);
+        const findIndex: number = Todos.findIndex((t: Todo): boolean => t.id === id);
         // if todo not found
         if (findIndex < 0) {
             response.status = 404;
@@ -106,9 +106,9 @@ export default {
         };
         return;
     },
-    deleteTodo({ params, response }: myCtx) {
+    deleteTodo({ params, response }: myCtx): void {
         const id: string = params.id;
-        const findIndex = Todos.findIndex((t):boolean => t.id === id);
+        const findIndex: number = Todos.findIndex((t: Todo):boolean => t.id === id);
         if (findIndex < 0) {
             response.status = 404;
             response.body = {

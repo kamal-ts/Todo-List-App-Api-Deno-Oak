@@ -1,4 +1,4 @@
-import { Response, Request, v5 } from "../deps.ts";
+import { Response, Request } from "../deps.ts";
 import { Todos } from '../data/todos.ts'
 import Todo from "../interfaces/Todo.ts";
 
@@ -52,9 +52,9 @@ export default {
             };
             return;
         }
-        const NAMESPACE_URL = "6ba7b810-9dad-11d1-80b4-00c04fd430c8";
+        
         const data: Todo = {
-            id: String(await v5.generate(NAMESPACE_URL, new TextEncoder().encode("python.org"))),
+            id: String(crypto.randomUUID()),
             todo: String(todo),
             isCompleted: Boolean(isCompleted),
             createdAt: String(new Date()),
@@ -106,7 +106,23 @@ export default {
         };
         return;
     },
-    deleteTodo({ response }: myCtx) {
-        response.status
+    deleteTodo({ params, response }: myCtx) {
+        const id: string = params.id;
+        const findIndex = Todos.findIndex((t):boolean => t.id === id);
+        if (findIndex < 0) {
+            response.status = 404;
+            response.body = {
+                success: false,
+                messsage: "id not found"
+            }
+            return
+        }
+        Todos.splice(findIndex, 1);
+        response.status = 200;
+        response.body = {
+            success: true,
+            message: "todo has been deleted"
+        }
+        return;
     }
 }

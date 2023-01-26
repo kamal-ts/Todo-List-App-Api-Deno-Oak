@@ -2,6 +2,7 @@ import { Router } from "../deps.ts";
 import todoController from '../controller/todoController.ts';
 
 const router = new Router();
+// const todoController = new TodoController();
 
 router
     .get("/todos", todoController.getAllTodos)
